@@ -1,0 +1,26 @@
+{
+    "file": "water.h5",
+    "output": "rdfs.h5",
+    "frames": "all",
+    "r_range": [
+        0,
+        20.0
+    ],
+    "bin_width": 0.001,
+    "atypes": {
+        "Ow": {
+            "name": "Ow",
+            "resname": "HOH",
+            "element": "O",
+            "N": 3557,
+            "replicates": true
+        },
+        "Hw": {
+            "name": "Hw",
+            "resname": "HOH",
+            "element": "H",
+            "N": 3557,
+            "replicates": true
+        }
+    }
+}
