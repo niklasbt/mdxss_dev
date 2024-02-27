@@ -15,7 +15,7 @@ Under construction...
 ### Dependencies
 
 As currently built, `mdxcs` depends on:
-  - itertools
+  - itertools (*likely to change*)
   - json
   - mdtraj
   - numpy

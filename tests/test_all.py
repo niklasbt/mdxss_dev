@@ -1,6 +1,6 @@
 # imports
-from mdxss.bin import ParseTraj, RDFcalc, DebyeRDF
-from mdxss.helpers import Icoh
+from mdxcs.bin import ParseTraj, RDFcalc, DebyeRDF
+from mdxcs.helpers import Icoh
 import numpy as np
 
 # parse test trajectory
