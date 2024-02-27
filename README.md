@@ -14,7 +14,7 @@ Under construction...
 
 ### Dependencies
 
-As currently built, `mdxss` depends on:
+As currently built, `mdxcs` depends on:
   - itertools
   - json
   - mdtraj
