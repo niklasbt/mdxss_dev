@@ -15,11 +15,13 @@ where $I(Q)$ is the scattering intensity as a function of the momentum transfer,
 
 For isotropic systems, this equation is the most general formula to calculate coherent scattering intensities, under the independent atom approximation. As such, this code implements the DSE directly, making no approximations. The accuracy of the results is limited by (a) the size of the simulation cell (a source of finite-size errors), and (b) user-controlled parameters defining the quantization of the calculation.
 
-Nevertheless, the code does not actually compute the DSE in the form given above. Rather, taking advangate of efficient codes to compute real-space radial distribution functions from MD simulation data, rather, we calculate,
+Nevertheless, the code does not actually compute the DSE in the form given above. Rather, taking advantage of efficient codes to compute real-space radial distribution functions (RDFs) from MD simulation data, rather, we essentially compute the Fourier transform of the DSE.
 
+### RDF-based scattering calculation
+
+Assume we have a trajectory consisting of $M$ frames ($\{f_i\}_{i=1,\dots,M}$), each of which contains $N$ atoms ($\{a_i\}_{i=1,\dots,N}$). Suppose we classify all atoms into types $\alpha, \beta, \gamma, \dots$, such that each type is composed of a single element (there may be distinct atom types of the same element). Then the coherent scattering intensity arising from a single frame of the trajectory can be computed according to,
 ```math
-I_{\mathrm{coh},f_k}(Q) = \sum_\alpha{N_\alpha f_\alpha(Q)^2} + \\
-	 \sum_\alpha{\sum_\beta{f_\alpha(Q)f_\beta(Q)\frac{N_\alpha\left(N_\beta - \delta_{\alpha\beta}\right)}{V_{f_k}}\int_0^\infty{4\pi r^2 \left(g_{\alpha\beta, f_k}(r) - g_{0,\alpha\beta} \right)\frac{\sin{Qr}}{Qr}\mathrm{d}r} }}
+I_{\mathrm{coh},f_k}(Q) = \sum_\alpha{N_\alpha f_\alpha(Q)^2} + \sum_\alpha{\sum_\beta{f_\alpha(Q)f_\beta(Q)\frac{N_\alpha\left(N_\beta - \delta_{\alpha\beta}\right)}{V_{f_k}}\int_0^\infty{4\pi r^2 \left(g_{\alpha\beta, f_k}(r) - g_{0,\alpha\beta} \right)\frac{\sin{Qr}}{Qr}\mathrm{d}r} }}
 ```
 
 ## Implementation
