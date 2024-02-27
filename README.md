@@ -19,7 +19,7 @@ Nevertheless, the code does not actually compute the DSE in the form given above
 
 ### RDF-based scattering calculation
 
-Assume we have a trajectory consisting of $M$ frames ($\{f_i\}_{i=1,\dots,M}$), each of which contains $N$ atoms ($\{a_i\}_{i=1,\dots,N}$). Suppose we classify all atoms into types $\alpha, \beta, \gamma, \dots$, such that each type is composed of a single element (there may be distinct atom types of the same element). Then the coherent scattering intensity arising from a single frame of the trajectory can be computed according to,
+Assume we have a trajectory consisting of $M$ frames ($`\{f_i\}_{i=1,\dots,M}`$), each of which contains $N$ atoms ($`\{a_i\}_{i=1,\dots,N}`$). Suppose we classify all atoms into types $\alpha, \beta, \gamma, \dots$, such that each type is composed of a single element (there may be distinct atom types of the same element). Then the coherent scattering intensity arising from a single frame of the trajectory can be computed according to,
 ```math
 I_{\mathrm{coh},f_k}(Q) = \sum_\alpha{N_\alpha f_\alpha(Q)^2} + \sum_\alpha{\sum_\beta{f_\alpha(Q)f_\beta(Q)\frac{N_\alpha\left(N_\beta - \delta_{\alpha\beta}\right)}{V_{f_k}}\int_0^\infty{4\pi r^2 \left(g_{\alpha\beta, f_k}(r) - g_{0,\alpha\beta} \right)\frac{\sin{Qr}}{Qr}\mathrm{d}r} }}
 ```
