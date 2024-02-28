@@ -21,8 +21,11 @@ Nevertheless, the code does not actually compute the DSE in the form given above
 
 Assume we have a trajectory consisting of $M$ frames ($`\{f_i\}_{i=1,\dots,M}`$), each of which contains $N$ atoms ($`\{a_i\}_{i=1,\dots,N}`$). Suppose we classify all atoms into types $\alpha, \beta, \gamma, \dots$, such that each type is composed of a single element (there may be distinct atom types of the same element). Then the coherent scattering intensity arising from a single frame of the trajectory can be computed according to,
 ```math
-I_{\mathrm{coh},f_k}(Q) = \sum_\alpha{N_\alpha f_\alpha(Q)^2} + \sum_\alpha{\sum_\beta{f_\alpha(Q)f_\beta(Q)\frac{N_\alpha\left(N_\beta - \delta_{\alpha\beta}\right)}{V_{f_k}}\int_0^\infty{4\pi r^2 \left(g_{\alpha\beta, f_k}(r) - g_{0,\alpha\beta} \right)\frac{\sin{Qr}}{Qr}\mathrm{d}r} }}
+\begin{align}
+    I_{\mathrm{coh},f_k}(Q) &= \sum_\alpha{N_\alpha f_\alpha(Q)^2} + \\
+    &\sum_\alpha{\sum_\beta{f_\alpha(Q)f_\beta(Q)\frac{N_\alpha\left(N_\beta - \delta_{\alpha\beta}\right)}{V_{f_k}}\int_0^\infty{4\pi r^2 \left(g_{\alpha\beta, f_k}(r) - g_{0,\alpha\beta} \right)\frac{\sin{Qr}}{Qr}\mathrm{d}r} }}
 ```
+where $V_{f_k}$ is the volume of the simulation cell, $g_{\alpha\beta, f_k}(r)$ is the pair radial distribution function (RDF) for atom types $\alpha$ and $\beta$ computed from frame $f_k$, and $g_{0,\alpha\beta}$ is the (theoretical) limit of the RDF as $r\to\infty$ ($g_{0,\alpha\beta} = 1$ for collections of freely-diffusing atoms, while $g_{0,\alpha\beta} = 0$ for collections of atoms bound in a single molecule). The first term in the sum provides the self-scattering while the second provides the distinct scattering. Implicit in the double summation above is that when $\alpha = \beta$, only distinct atom pairs are selected in the computation of the RDF. 
 
 ## Implementation
 
