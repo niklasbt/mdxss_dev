@@ -33,7 +33,7 @@ Assume we have a trajectory consisting of $M$ frames ($`\{f_i\}_{i=1,\dots,M}`$)
     &\sum_\alpha{\sum_\beta{f_\alpha(Q)f_\beta(Q)\frac{N_\alpha\left(N_\beta - \delta_{\alpha\beta}\right)}{V_{f_k}}\int_0^\infty{4\pi r^2 \left(g_{\alpha\beta, f_k}(r) - g_{0,\alpha\beta} \right)\frac{\sin{Qr}}{Qr}\mathrm{d}r} }}
 \end{align}
 ```
-where $V_{f_k}$ is the volume of the simulation cell, $g_{\alpha\beta, f_k}(r)$ is the pair radial distribution function (RDF) for atom types $\alpha$ and $\beta$ computed from frame $f_k$, and $g_{0,\alpha\beta}$ is the (theoretical) limit of the RDF as $r\to\infty$ ($g_{0,\alpha\beta} = 1$ for collections of freely-diffusing atoms, while $g_{0,\alpha\beta} = 0$ for collections of atoms bound in a single molecule). The first term in the sum provides the self-scattering while the second provides the distinct scattering. Implicit in the double summation above is that when $\alpha = \beta$, only distinct atom pairs are selected in the computation of the RDF. 
+where $V_{f_k}$ is the volume of the simulation cell, $g_{\alpha\beta, f_k}(r)$ is the pair radial distribution function (RDF) for atom types $\alpha$ and $\beta$ computed from frame $f_k$, and $g_{0,\alpha\beta}$ is the (theoretical) limit of the RDF as $r\to\infty$ ($g_{0,\alpha\beta} = 1$ for collections of freely-diffusing atoms, while $g_{0,\alpha\beta} = 0$ for collections of atoms bound in a single molecule). The first term in the sum provides the self-scattering while the second provides the distinct scattering. Implicit in the double summation above is that when $\alpha = \beta$, only distinct atom pairs are selected in the computation of the RDF (the $\alpha = \beta$ case for self-pairs is separated out in the first sum). 
 
 ## Implementation
 
