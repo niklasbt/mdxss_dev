@@ -6,12 +6,19 @@ This repository contains code for the Python package `mdxcs`, an acronym for `m`
 
 We consider atomistic molecular dynamics trajectories (*i.e.*, non-coarse-grained), which are typically treated as quasi-periodic systems under the minimum image convention. Most simply, such trajectories consist of a series of snapshots ('frames'), each of which is defined as a periodic cell (the 'unit cell', if you like) filled with $N$ atoms (say). We should like to compute coherent X-ray scattering intensities using the structural information encoded by such trajectories.
 
+The total coherent (that is to say, elastic) scattering is given by the sum of the so-called self-scattering (which contains no structural information) and the distinct scattering (the interference term that provides two-body information),
+
+```math
+I(\mathbf{Q}) = I_\text{self}(\mathbf{Q}) + I_\text{d}(\mathbf{Q})
+```
+where $I(\mathbf{Q})$ is the (anisotropic) scattering intensity as a function of momentum transfer, $\mathbf{Q}$.
+
 Assuming we are considering an isotropic scatterer (*e.g.*, a macroscopically-homogeneous system, such as a liquid),[^1] then the appropriate (atomistic) formalism is the Debye scattering equation (DSE),[^2]
 
 ```math
   I(Q) = \sum_{i=1}^N{\sum_{j=1}^N{f_j^*(Q)f_i(Q)\frac{\sin{Qr_{ij}}}{Qr_{ij}}}}
 ``` 
-where $I(Q)$ is the scattering intensity as a function of the momentum transfer, $Q$ (which is related to the elastic scattering angle, $2\theta$, by $Q = |\mathbf{Q}| = 4\pi\sin{\theta}/\lambda$ for X-rays of wavelength $\lambda$), $f_i(Q)$ is the X-ray scattering form factor for atom $i$, the double-summation is over all pairs of atoms $(i, j)$, and $r_{ij}$ is the distance between atoms (scatterers) $i$ and $j$. 
+where $I(Q)$ is the scattering intensity as a function of the *modulus* of the momentum transfer, $Q$ (which is related to the elastic scattering angle, $2\theta$, by $Q = |\mathbf{Q}| = 4\pi\sin{\theta}/\lambda$ for X-rays of wavelength $\lambda$), $f_i(Q)$ is the X-ray scattering form factor for atom $i$, the double-summation is over all pairs of atoms $(i, j)$, and $r_{ij}$ is the distance between atoms (scatterers) $i$ and $j$. 
 
 For isotropic systems, this equation is the most general formula to calculate coherent scattering intensities, under the independent atom approximation.[^3] As such, this code implements the DSE directly, making no approximations. The accuracy of the results is limited by (a) the size of the simulation cell (a source of finite-size errors), and (b) user-controlled parameters defining the quantization of the calculation.
 
@@ -22,7 +29,7 @@ Nevertheless, the code does not actually compute the DSE in the form given above
 Assume we have a trajectory consisting of $M$ frames ($`\{f_i\}_{i=1,\dots,M}`$), each of which contains $N$ atoms ($`\{a_i\}_{i=1,\dots,N}`$). Suppose we classify all atoms into types $\alpha, \beta, \gamma, \dots$, such that each type is composed of a single element (there may be distinct atom types of the same element). Then the coherent scattering intensity arising from a single frame of the trajectory can be computed according to,
 ```math
 \begin{align}
-    I_{\mathrm{coh},f_k}(Q) &= \sum_\alpha{N_\alpha f_\alpha(Q)^2} + \\
+    &I_{\mathrm{coh},f_k}(Q) = \sum_\alpha{N_\alpha f_\alpha(Q)^2} + \\
     &\sum_\alpha{\sum_\beta{f_\alpha(Q)f_\beta(Q)\frac{N_\alpha\left(N_\beta - \delta_{\alpha\beta}\right)}{V_{f_k}}\int_0^\infty{4\pi r^2 \left(g_{\alpha\beta, f_k}(r) - g_{0,\alpha\beta} \right)\frac{\sin{Qr}}{Qr}\mathrm{d}r} }}
 \end{align}
 ```
