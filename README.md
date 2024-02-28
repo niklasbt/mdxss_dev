@@ -24,7 +24,7 @@ For isotropic systems, this equation is the most general formula to calculate co
 
 ### RDF-based scattering calculation
 
-Nevertheless, the code does not actually compute the DSE in the form given above. Rather, taking advantage of efficient codes to compute real-space radial distribution functions (RDFs) from MD simulation data, rather, we essentially compute the Fourier transform of the DSE.
+Nevertheless, the code does not actually compute the DSE in the form given above. Rather, taking advantage of efficient codes to compute real-space radial distribution functions (RDFs) from MD simulation data, we essentially compute the Fourier transform of the DSE, as follows.
 
 Assume we have a trajectory consisting of $M$ frames ($`\{f_i\}_{i=1,\dots,M}`$), each of which contains $N$ atoms ($`\{a_i\}_{i=1,\dots,N}`$). Suppose we classify all atoms into types $\alpha, \beta, \gamma, \dots$, such that each type is composed of a single element (there may be distinct atom types of the same element). Then the coherent scattering intensity arising from a single frame of the trajectory can be computed according to,
 ```math
