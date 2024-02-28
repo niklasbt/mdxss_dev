@@ -30,6 +30,23 @@ Under construction...
 
 ## Installation
 
+Pending a full release on PyPI, one can simply clone this repository:
+
+```code
+>> git clone https://github.com/niklasbt/mdxcs_dev.git
+```
+
+For easy of access, you can export the packaged to `PYTHONPATH`
+
+```code
+>> export PYTHONPATH=<path>/mdxcs:$PYTHONPATH
+
+# or, if you like:
+
+>> echo 'export PYTHONPATH=<path>/mdxcs:$PYTHONPATH' >> ~/.<rc file>
+>> source ~/.<rc file>
+```
+
 ### Dependencies
 
 As currently built, `mdxcs` depends on:
