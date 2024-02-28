@@ -75,7 +75,7 @@ As currently built, `mdxcs` depends on:
   - `pytables`
   - `scipy`
 
-[^1]: That is, homogeneous with respect to the coherence volume of the incident X-rays. Or: the characteristic coherence length of the material under illumination is much smaller than the characteristic length over which incident X-rays remain coherent. Otherwise we move towards 'Bragg Coherent Diffraction Imaging'.
-[^2]: See: Guinier, A. (1994). *X-ray Diffraction In Crystals, Imperfect Crystals, and Amorphous Bodies.* New York: Dover Publications; [https://doi.org/10.1063/5.0164365](https://doi.org/10.1063/5.0164365).
+[^1]: That is, homogeneous with respect to the coherence volume of the incident X-rays. Or: the characteristic coherence length of the material under illumination is much smaller than the characteristic length over which incident X-rays remain coherent. Otherwise we move towards 'Diffuse Coherent Diffraction Imaging', in analogy to BCDI.
+[^2]: See: Guinier, A. (1994). *X-ray Diffraction In Crystals, Imperfect Crystals, and Amorphous Bodies.* New York: Dover Publications; [https://doi.org/10.1063/5.0164365](https://doi.org/10.1088/0953-4075/48/24/244010).
 [^3]: Note that the limit of the final factor is well defined when the distance shrinks to zero, so this expression is well-defined for the self-scattering contribution.
 [^4]: Of course, really the most general formula would utilize the *actual* electron density, but the independent atom approximation is an efficient *ansatz*.
