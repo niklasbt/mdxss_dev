@@ -4,7 +4,7 @@ from mdxcs.helpers import Icoh
 import numpy as np
 
 # parse test trajectory
-ParseTraj.parse_trajectory('water.h5', name='y')
+ParseTraj.parse_trajectory('water.h5', name='n')
 
 # compute RDFS
 RDFcalc.run('config.json')

@@ -1,7 +1,9 @@
 #!/usr/bin/env python
-'''RDFCalc.py: Compute RDFs from MD trajectories
-
-Usage: python RDFCalc.py <input.json>
+'''RDFCalc.py: Compute RDFs from MD trajectories ---------------------------
+                                                                            |
+  Author: Niklas B. Thompson                                                |
+                                                                            |
+----------------------------------------------------------------------------
 '''
 # imports ####################################################################
 import json
@@ -93,8 +95,15 @@ def parse_trajectory(fname, **kwargs):
         Dictionary of atom types. Each element in a given residue type is
         assigned as a unique type.
     '''
+    print('\n##################################################################')
+    print('##                                                              ##')
+    print('#                  ***ENTERING ParseTraj.py***                   #')
     trajectory = md.load(fname)
+    print(f'\n\tTrajectory loaded...\t{fname}')
     residues = parse_residues(trajectory)
+    print('\tResidues found...')
+    for residue in residues:
+        print(f'\t\t{residue[0].name}')
     atypes = {}
     for residue in residues:
         atypes = {**atypes, **atypes_from_residue(residue)}
@@ -123,6 +132,10 @@ def parse_trajectory(fname, **kwargs):
             fid,
             indent=4
         )
+        print('\tFile config.json written...')
+    print('\n#            ***NORMAL TERMINATION OF ParseTraj.py***            #')
+    print('##                                                              ##')
+    print('##################################################################\n')
     return(atypes)
 
 

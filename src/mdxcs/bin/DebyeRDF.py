@@ -1,7 +1,9 @@
 #!/usr/bin/env python
-'''DebyeRDF.py: Coherent scattering from RDFs
-
-Usage: python DebyeRDF.py <RDFs.h5> <qmin> <qmax> <qstep> <output.h5>
+'''DebyeRDF.py: Coherent scattering from RDFs ------------------------------
+                                                                            |
+  Author: Niklas B. Thompson                                                |
+                                                                            |
+----------------------------------------------------------------------------
 '''
 # imports ####################################################################
 import numpy as np
@@ -152,23 +154,23 @@ def compute_partial(q_grid, rdf):
     integral = evaluate_integral(q_grid, rdf).flatten()
     # two cases: alpha = beta and alpha !=beta
     if rdf.alpha.name == rdf.beta.name:
-        print(f'\t\tAtom types: {rdf.alpha.name} = {rdf.beta.name}')
-        print(f'\t\tN_a = {N_alpha}')
-        print(f'\t\tg_0 = {rdf.g0}')
+        print(f'\t\t\tAtom types: {rdf.alpha.name} = {rdf.beta.name}')
+        print(f'\t\t\tN_a = {N_alpha}')
+        print(f'\t\t\tg_0 = {rdf.g0}')
         norm = N_alpha*(N_alpha - 1)
         id_ab = norm*f_alpha**2*integral
-        print('\t...computed distinct scattering contribution')
+        print('\t\t...computed distinct scattering contribution')
         # in this case there is a self-scattering contribution
         is_ab = N_alpha*f_alpha**2
-        print('\t...computed self-scattering contribution')
+        print('\t\t...computed self-scattering contribution')
     else:
-        print(f'\t\tAtom types: {rdf.alpha.name} != {rdf.beta.name}')
-        print(f'\t\tN_a = {N_alpha}, N_b = {N_beta}')
-        print(f'\t\tg_0 = {rdf.g0}')
+        print(f'\t\t\tAtom types: {rdf.alpha.name} != {rdf.beta.name}')
+        print(f'\t\t\tN_a = {N_alpha}, N_b = {N_beta}')
+        print(f'\t\t\tg_0 = {rdf.g0}')
         norm = N_alpha*N_beta
         # in this case we multiply by 2 to do proper counting
         id_ab = 2*norm*f_alpha*f_beta*integral
-        print('\t...computed distinct scattering contribution')
+        print('\t\t...computed distinct scattering contribution')
         is_ab = np.zeros(len(q_grid))
     return(id_ab, is_ab)
 
@@ -199,9 +201,9 @@ def compute_icoh(q_grid, rdf_list):
     '''
     N = len(rdf_list)
     id_list, is_list = [], []
-    print('\nStarting elastic scattering calculation...')
+    print('\n\tStarting elastic scattering calculation...')
     for k in range(N):
-        print(f'\n\tComputing term {k+1}/{N}...')
+        print(f'\t\tComputing term {k+1}/{N}...')
         id_temp, is_temp = compute_partial(
             q_grid, rdf_list[k]
         )
@@ -264,33 +266,43 @@ def write_output(fname, rdf_list, q_grid, id_list, is_list):
 
 
 def run(inp, qmin=0.5, qmax=25.005, qstep=0.01, output='icoh.h5'):
+    print('\n##################################################################')
+    print('##                                                              ##')
+    print('#                   ***ENTERING DebyeRDF.py***                   #')
+    #print('#  ####################                                #')
+    #print('#                                                      #')
     # get rdfs
-    print(f'\nLoading RDFs from {inp}...')
+    print(f'\n\tLoading RDFs from {inp}...')
     rdfs = load_rdfs(inp)
     print(
-        f'\tFound\t{int((-1 + np.sqrt(1 + 8*len(rdfs)))/2)} atom types,'
-        f' {len(rdfs)} RDFs'
+        f'\t\tFound\t{int((-1 + np.sqrt(1 + 8*len(rdfs)))/2)} atom types,'
+        f'\t {len(rdfs)} RDFs'
     )
-    print('\tAtom types:\n\t\t\tResidue\tElement\tN')
+    print('\t\t----------------------------------------------')
+    print('\t\tAtom types:\tResidue\tElement\tN')
+    print('\t\t----------------------------------------------')
     for rdf in rdfs:
         if rdf.alpha.name == rdf.beta.name:
             print(
-                f'\t\t{rdf.alpha.name}:\t{rdf.alpha.resname}'
-                f'\t{rdf.alpha.element}\t{rdf.alpha.N}'
+                f'\t\t\t{rdf.alpha.name}:\t{rdf.alpha.resname}'
+                f'\t\t{rdf.alpha.element}\t{rdf.alpha.N}'
             )
-    print('\nSetting up calculation...')
+    print('\t\t----------------------------------------------')
+    print('\n\tSetting up calculation...')
     # define q-grid
     q = np.arange(qmin, qmax, qstep)
-    print(f'\tQ_min = {q[0]:.2f} 1/A')
-    print(f'\tQ_max = {q[-1]:.2f} 1/A')
-    print(f'\tDQ = {qstep} 1/A')
+    print(f'\t\tQ_min = {q[0]:.2f} 1/A')
+    print(f'\t\tQ_max = {q[-1]:.2f} 1/A')
+    print(f'\t\tDQ = {qstep} 1/A')
     print(
-        f'\tDimension per RDF: {rdfs[0].g.shape} ~ {np.prod(rdfs[0].g.shape)}'
+        f'\t\tDimension per RDF: {rdfs[0].g.shape} ~ {np.prod(rdfs[0].g.shape)}'
     )
     # compute coherent scattering intensities
     i_dist, i_self = compute_icoh(q, rdfs)
     # write output file
-    print(f"\nWriting {output}...")
+    print(f"\n\tWriting {output}...")
     write_output(output, rdfs, q, i_dist, i_self)
-    print('\n...done!')
+    print('\n#             ***NORMAL TERMINATION OF DebyeRDF.py***            #')
+    print('##                                                              ##')
+    print('##################################################################\n')
     

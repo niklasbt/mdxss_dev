@@ -1,7 +1,9 @@
 #!/usr/bin/env python
-'''RDFCalc.py: Compute RDFs from MD trajectories
-
-Usage: python RDFCalc.py <input.json>
+'''RDFCalc.py: Compute RDFs from MD trajectories ---------------------------
+                                                                            |
+  Author: Niklas B. Thompson                                                |
+                                                                            |
+----------------------------------------------------------------------------
 '''
 # imports ####################################################################
 import json
@@ -124,14 +126,14 @@ def compute_rdfs(trajectory, system, config, length):
     if length == 'all':
         length = len(trajectory)
     # initialize rdfs
-    print('\tInitializing...')
+    print('\t\tInitializing...')
     rdfs = prepare_rdfs()
     # compute rdfs
-    print('\tComputing RDFs...')
+    print('\t\tComputing RDFs...')
     for k in range(length):
         for j in range(len(rdfs)):
             print(
-                f'\t\tFrame {k+1}/{length}\tRDF: '
+                f'\t\t\tFrame {k+1}/{length}\tRDF: '
                 f'{(j+1) + k*len(rdfs)}/{len(rdfs) * length}',
                 end='\r'
             )
@@ -206,13 +208,18 @@ def write_rdfs(fname, rdf_list):
 
 
 def run(atypes):
+    print('\n##################################################################')
+    print('##                                                              ##')
+    print('#                   ***ENTERING RDFcalc.py***                    #')
     with open(atypes, 'r') as fid:
 	    inp = json.load(fid)
 	# prepare calculation
-    print(f"\nLoading {inp['file']}...")
+    print(f"\n\tLoading...\t{inp['file']}")
     traj = md.load(inp['file'])
-    print('\nPreparing system...')
-    print('\tAtom types:\n\t\t\tResidue\tElement\tN')
+    print('\n\tPreparing system...')
+    print('\t\t--------------------------------------')
+    print('\t\tAtom types:\tResidue\tElement\tN')
+    print('\t\t--------------------------------------')
     sys = [] 
     for atom in inp['atypes'].values():
         sys.append(AType(
@@ -223,24 +230,28 @@ def run(atypes):
             atom['replicates']
         ))
     for atom in sys:
-        print(f'\t\t{atom.name}:\t{atom.resname}\t{atom.element}\t{atom.N}')
+        print(f'\t\t\t{atom.name}:\t{atom.resname}\t{atom.element}\t{atom.N}')
     N_frames = inp['frames']
+    print('\t\t--------------------------------------')
     if N_frames == 'all':
-        print(f'\tFrames:\t{len(traj)} ({N_frames})')
+        print(f'\t\tFrames:\t{len(traj)} ({N_frames})')
     else:
-        print(f'\tFrames:\t{N_frames}')
+        print(f'\t\tFrames:\t{N_frames}')
 	# configuration for calculation (in nm)
     config = {
         'r_range': np.array(inp['r_range']) / 10,  # convert ang. > nm
         'bin_width': inp['bin_width'] / 10  # ibid.
     }
-    print(f"\tr_max:\t{config['r_range'][1] * 10:.2f} A")
-    print(f"\tdr:\t{config['bin_width'] * 10} A")
-    print('\nPerforming calculation...')
+    print(f"\t\tr_max:\t{config['r_range'][1] * 10:.2f} A")
+    print(f"\t\tdr:\t{config['bin_width'] * 10} A")
+    print('\t\t--------------------------------------')
+    print('\n\tPerforming calculation...')
     # do the calculation
     rdfs = compute_rdfs(traj, sys, config, length=N_frames)
     # write output file
-    print(f"\nWriting {inp['output']}...")
+    print(f"\n\tWriting...\t{inp['output']}")
     write_rdfs(inp['output'], rdfs)
-    print('\n...done!\n')
+    print('\n#             ***NORMAL TERMINATION OF RDFcalc.py***             #')
+    print('##                                                              ##')
+    print('##################################################################\n')
 
