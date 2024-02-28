@@ -36,17 +36,23 @@ Pending a full release on PyPI, one can simply clone this repository:
 >> git clone https://github.com/niklasbt/mdxcs_dev.git
 ```
 
-For easy of access, you can export the packaged to `PYTHONPATH`
+For ease of access, you can export the package to `PYTHONPATH`:
 
 ```code
 >> export PYTHONPATH=<path>/mdxcs:$PYTHONPATH
+```
 
-# or, if you like:
+Or, if you like:
 
+```code
 >> echo 'export PYTHONPATH=<path>/mdxcs:$PYTHONPATH' >> ~/.<rc file>
 >> source ~/.<rc file>
 ```
 
+Try:
+```code
+>> python mdxcs_dev/tests/test_all.py
+```
 ### Dependencies
 
 As currently built, `mdxcs` depends on:
