@@ -20,19 +20,17 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE  #
 # SOFTWARE.                                                                      #
 #                                                                                #
+#                                                                                #
+# N.B.: The author would greatly appreciate citing the following if you intend   #
+# to publish work using this code:                                               #
+#                                                                                #
+# @article{                                                                      #
+#    author = {Niklas B. Thompson and Karen L. Mulfort and David M. Tiede},      #
+#    journal = {IUCrJ},                                                          #
+#    year = {2024}                                                               #
+#    volume = {}                                                                 #
+#    pages = {}                                                                  #
+#    doi = {}                                                                    #
+# }                                                                              #
+#                                                                                #
 ##################################################################################
-
-N.B.: The author would greatly appreciate citing the following if you intend to
-publish work using this code:
-
-@article{
-    author = {Niklas B. Thompson and Karen L. Mulfort and David M. Tiede},
-    title = {Toward a Quantitative Description of Solvation Structure: An \textit{Ansatz} for Differential Solution Scattering Measurements},
-    journal = {IUCrJ},
-    year = {2024}
-    volume = {}
-    pages = {}
-    doi = {}
-}
-
-END OF LICENSE
