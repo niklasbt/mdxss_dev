@@ -229,7 +229,7 @@ def write_output(fname, rdf_list, q_grid, id_list, is_list):
     '''
     class AtomMeta(tb.IsDescription):
         '''PyTables class reference'''
-        name = tb.StringCol(3, pos=0)
+        name = tb.StringCol(6, pos=0)
         resname = tb.StringCol(4, pos=1)
         element = tb.StringCol(2, pos=2)
         N = tb.Int32Col(pos=3)
