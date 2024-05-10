@@ -52,7 +52,7 @@ def atypes_from_residue(residue):
     Returns
     -------
     atypes : dict
-        Dictionary of atom types. The naming convention is 'symbol-resname'.
+        Dictionary of atom types. The naming convention is 'symbol_resname'.
         N.B. the names should be updated manually to follow the convention
         'Symbol<x>' where 'x' is a single character identifier.
     '''
@@ -63,7 +63,7 @@ def atypes_from_residue(residue):
         # add new type if not present in list
         else:
             if not any(
-                f'{atom.element.symbol}-{residue[0].name}'
+                f'{atom.element.symbol}_{residue[0].name}'
                 == key for key in atypes.keys()
             ):
                 atypes[f'{atom.element.symbol}_{residue[0].name}'] = {
@@ -111,7 +111,7 @@ def parse_trajectory(fname, **kwargs):
         if key == 'name' and kwargs['name'].lower() == 'y':
             atypes = rename_types(atypes)
     if not 'r_range' in kwargs.keys():
-        r_max = np.floor(np.min(trajectory.unitcell_lengths) / 2) * 10
+        r_max = np.floor(np.min(trajectory.unitcell_lengths) / 2 * 10)
         kwargs['r_range'] = [0, r_max] # default choice, ang.
     if not 'bin_width' in kwargs.keys():
         kwargs['bin_width'] = 0.001 # default choice, ang.
